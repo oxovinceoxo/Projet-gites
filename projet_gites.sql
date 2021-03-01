@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `shoppingcart_advanced` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `shoppingcart_advanced`;
+CREATE DATABASE IF NOT EXISTS `db_gites` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `db_gites`;
 
 CREATE TABLE IF NOT EXISTS `accounts` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -17,7 +17,8 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 INSERT INTO `accounts` (`id`, `email`, `password`, `first_name`, `last_name`, `address_street`, `address_city`, `address_state`, `address_zip`, `address_country`, `admin`) VALUES
-(1, 'admin@codeshack.io', '$2y$10$pEHRAE4Ia0mE9BdLmbS.ueQsv/.WlTUSW7/cqF/T36iW.zDzSkx4y', 'John', 'Doe', '98 High Street', 'New York', 'NY', '10001', 'United States', 1);
+(1, 'admin@admin.com', '$2y$10$pEHRAE4Ia0mE9BdLmbS.ueQsv/.WlTUSW7/cqF/T36iW.zDzSkx4y', 'Georges', 'Admin', '98 High Street', 'New York', 'NY', '10001', 'United States', 1),
+(2, 'user@user.com', '$2y$10$pEHRAE4Ia0mE9BdLmbS.ueQsv/.WlTUSW7/cqF/T36iW.zDzSkx4y', 'Georges', 'User', '98 High Street', 'New York', 'NY', '10001', 'United States', 0);
 
 CREATE TABLE IF NOT EXISTS `categories` (
 `id` int(11) NOT NULL AUTO_INCREMENT,

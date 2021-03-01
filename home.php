@@ -9,12 +9,12 @@ $recently_added_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?=template_header('Home')?>
 
 <div class="featured" style="background-image:url(<?=featured_image?>)">
-    <h2>Gadgets</h2>
-    <p>Essential gadgets for everyday use</p>
+    <h2>Le bon gite</h2>
+    <p>Des gites qui sont biens</p>
 </div>
 
 <div class="recentlyadded content-wrapper">
-    <h2>Recently Added Products</h2>
+    <h2>Les derniers gîtes ajoutés</h2>
     <div class="products">
         <?php foreach ($recently_added_products as $product): ?>
         <a href="<?=url('index.php?page=product&id=' . ($product['url_structure'] ? $product['url_structure']  : $product['id']))?>" class="product">

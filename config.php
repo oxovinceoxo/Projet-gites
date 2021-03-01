@@ -7,15 +7,15 @@ define('db_user','root');
 // Database password
 define('db_pass','');
 // Database name
-define('db_name','shoppingcart_advanced');
+define('db_name','db_gites');
 
 /* GENERAL SETTINGS */
 // This will change the title on the website
-define('site_name','Shopping Cart');
+define('site_name','Le bon gite');
 // Currency code, default is USD, you can view the list here: http://cactus.io/resources/toolbox/html-currency-symbol-codes
-define('currency_code','&dollar;');
+define('currency_code','&euro;');
 // Featured image URL
-define('featured_image','imgs/featured-image.jpg');
+define('featured_image','imgs/fond.jpg');
 // Account required for checkout?
 define('account_required',true);
 // The from email that will appear on the customer's order details email

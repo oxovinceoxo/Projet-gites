@@ -10,8 +10,8 @@ unset($_SESSION['cart']);
 <p class="content-wrapper error"><?=$error?></p>
 <?php else: ?>
 <div class="placeorder content-wrapper">
-    <h1>Your Order Has Been Placed</h1>
-    <p>Thank you for ordering with us, we'll contact you by email with your order details.</p>
+    <h1>Votre réservation a bien été effectuée</h1>
+    <p>Merci pour votre réservation, vous recevrez votre confirmation d'ici 15 minutes.</p>
 </div>
 <?php endif; ?>
 
