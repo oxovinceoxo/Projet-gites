@@ -1,5 +1,11 @@
+-- I. Création de la DB 
+
 CREATE DATABASE IF NOT EXISTS `db_gites` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `db_gites`;
+
+-- -II. Création des tables 
+
+-- II.1 Création de la table "accounts" (utilisateurs et administrateurs) 
 
 CREATE TABLE IF NOT EXISTS `accounts` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -16,10 +22,15 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+-- Dump des données dans la table accounts 
 INSERT INTO `accounts` (`id`, `email`, `password`, `first_name`, `last_name`, `address_street`, `address_city`, `address_state`, `address_zip`, `address_country`, `admin`) VALUES
-(1, 'admin@admin.com', '$2y$10$pEHRAE4Ia0mE9BdLmbS.ueQsv/.WlTUSW7/cqF/T36iW.zDzSkx4y', 'Georges', 'Admin', '98 High Street', 'New York', 'NY', '10001', 'United States', 1),
-(2, 'user@user.com', '$2y$10$pEHRAE4Ia0mE9BdLmbS.ueQsv/.WlTUSW7/cqF/T36iW.zDzSkx4y', 'Georges', 'User', '98 High Street', 'New York', 'NY', '10001', 'United States', 0);
+(1, 'admin@admin.com', '$2y$12$38GJNyn7EUGUewbmxzw4herh8btjUblv40GL3fQIf1i3V4BR/NANW', 'Georges', 'Admin', 'Rue des Palmiers', 'Paris', 'NY', '75000', 'France', 1),
+(2, 'user@user.com', '$2y$12$Vsq9JjZAQPlPA.U2oYk9TuTPdzc4ceGs6iW2EX6o05Be.jSTGAH2W', 'Georges', 'User', 'Rue des roses', 'Marseille', 'NY', '13001', 'France', 0);
 
+-- Création de la clef unique "e-mail"
+ALTER TABLE `accounts` ADD UNIQUE KEY `email` (`email`);
+
+-- II.2 Création de la table "categories" 
 CREATE TABLE IF NOT EXISTS `categories` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -31,6 +42,7 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 (2, 'Watches'),
 (3, 'Accessories');
 
+-- II.3 Création de la table "discounts" 
 CREATE TABLE IF NOT EXISTS `discounts` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `category_ids` varchar(50) NOT NULL,
@@ -46,6 +58,7 @@ CREATE TABLE IF NOT EXISTS `discounts` (
 INSERT INTO `discounts` (`id`, `category_ids`, `product_ids`, `discount_code`, `discount_type`, `discount_value`, `start_date`, `end_date`) VALUES
 (1, '', '', 'newyear2021', 'Percentage', '5.00', '2021-01-01 00:00:00', '2021-12-31 00:00:00');
 
+-- II.3 Création de la table "products" 
 CREATE TABLE IF NOT EXISTS `products` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
@@ -62,10 +75,10 @@ CREATE TABLE IF NOT EXISTS `products` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `rrp`, `quantity`, `img`, `date_added`, `weight`, `download_url`, `url_structure`) VALUES
-(1, 'Smart Watch', '<p>Unique watch made with stainless steel, ideal for those that prefer interative watches.</p>\r\n<h3>Features</h3>\r\n<ul>\r\n<li>Powered by Android with built-in apps.</li>\r\n<li>Adjustable to fit most.</li>\r\n<li>Long battery life, continuous wear for up to 2 days.</li>\r\n<li>Lightweight design, comfort on your wrist.</li>\r\n</ul>', '29.99', '0.00', -1, 'watch.jpg', '2020-03-13 17:55:22', '0.00', '', 'smart-watch'),
-(2, 'Wallet', '', '14.99', '19.99', -1, 'wallet.jpg', '2020-03-13 18:52:49', '0.00', '', ''),
-(3, 'Headphones', '', '19.99', '0.00', -1, 'headphones.jpg', '2020-03-13 18:47:56', '34.00', '', ''),
-(4, 'Digital Camera', '', '269.99', '0.00', 43772, 'camera.jpg', '2020-03-14 17:42:04', '0.00', '', '');
+(1, 'Gite des flots bleus', '<p>Unique watch made with stainless steel, ideal for those that prefer interative watches.</p>\r\n<h3>Features</h3>\r\n<ul>\r\n<li>Powered by Android with built-in apps.</li>\r\n<li>Adjustable to fit most.</li>\r\n<li>Long battery life, continuous wear for up to 2 days.</li>\r\n<li>Lightweight design, comfort on your wrist.</li>\r\n</ul>', '35.99', '45.99', 1, '1.png', '2020-03-13 17:55:22', '0.00', '', 'smart-watch'),
+(2, 'La maison aux volets bleus', '', '45.99', '65.99', 1, '2.png', '2020-03-13 18:52:49', '0.00', '', ''),
+(3, 'La souriciere', '', '42.99', '52.99', 1, '3.png', '2020-03-13 18:47:56', '34.00', '', ''),
+(4, 'Le Fenil', '', '31.99', '70.99', 1, '4.png', '2020-03-14 17:42:04', '0.00', '', '');
 
 CREATE TABLE IF NOT EXISTS `products_categories` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -153,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `transactions_items` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
-ALTER TABLE `accounts` ADD UNIQUE KEY `email` (`email`);
+
 
 ALTER TABLE `products_categories` ADD UNIQUE KEY `product_id` (`product_id`,`category_id`);
 

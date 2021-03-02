@@ -209,7 +209,7 @@ main .recentlyadded .products .product .rrp, main .products .products-wrapper .p
 
 main .recentlyadded .products .product:hover img, main .products .products-wrapper .product:hover img {
   transform: scale(1.05);
-  transition: transform 1s;
+  transition: transform 0.5s;
 }
 
 main .recentlyadded .products .product:hover .name, main .products .products-wrapper .product:hover .name {
