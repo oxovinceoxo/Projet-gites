@@ -6,7 +6,6 @@ USE `db_gites`;
 -- -II. Création des tables 
 
 -- II.1 Création de la table "accounts" (utilisateurs et administrateurs) 
-
 CREATE TABLE IF NOT EXISTS `accounts` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
@@ -30,6 +29,8 @@ INSERT INTO `accounts` (`id`, `email`, `password`, `first_name`, `last_name`, `a
 -- Création de la clef unique "e-mail"
 ALTER TABLE `accounts` ADD UNIQUE KEY `email` (`email`);
 
+
+
 -- II.2 Création de la table "categories" 
 CREATE TABLE IF NOT EXISTS `categories` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -37,10 +38,13 @@ CREATE TABLE IF NOT EXISTS `categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
+-- Dump des données dans la table "categories" 
 INSERT INTO `categories` (`id`, `name`) VALUES
 (1, 'Sale'),
 (2, 'Watches'),
 (3, 'Accessories');
+
+
 
 -- II.3 Création de la table "discounts" 
 CREATE TABLE IF NOT EXISTS `discounts` (
@@ -55,8 +59,11 @@ CREATE TABLE IF NOT EXISTS `discounts` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+-- Dump des données dans la table "discounts" 
 INSERT INTO `discounts` (`id`, `category_ids`, `product_ids`, `discount_code`, `discount_type`, `discount_value`, `start_date`, `end_date`) VALUES
 (1, '', '', 'newyear2021', 'Percentage', '5.00', '2021-01-01 00:00:00', '2021-12-31 00:00:00');
+
+
 
 -- II.3 Création de la table "products" 
 CREATE TABLE IF NOT EXISTS `products` (
@@ -74,12 +81,16 @@ CREATE TABLE IF NOT EXISTS `products` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
+-- Dump des données dans la table "products" 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `rrp`, `quantity`, `img`, `date_added`, `weight`, `download_url`, `url_structure`) VALUES
 (1, 'Gite des flots bleus', '<p>Unique watch made with stainless steel, ideal for those that prefer interative watches.</p>\r\n<h3>Features</h3>\r\n<ul>\r\n<li>Powered by Android with built-in apps.</li>\r\n<li>Adjustable to fit most.</li>\r\n<li>Long battery life, continuous wear for up to 2 days.</li>\r\n<li>Lightweight design, comfort on your wrist.</li>\r\n</ul>', '35.99', '45.99', 1, '1.png', '2020-03-13 17:55:22', '0.00', '', 'smart-watch'),
 (2, 'La maison aux volets bleus', '', '45.99', '65.99', 1, '2.png', '2020-03-13 18:52:49', '0.00', '', ''),
 (3, 'La souriciere', '', '42.99', '52.99', 1, '3.png', '2020-03-13 18:47:56', '34.00', '', ''),
 (4, 'Le Fenil', '', '31.99', '70.99', 1, '4.png', '2020-03-14 17:42:04', '0.00', '', '');
 
+
+
+-- II.4 Création de la table "products_categories" 
 CREATE TABLE IF NOT EXISTS `products_categories` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
@@ -87,10 +98,17 @@ CREATE TABLE IF NOT EXISTS `products_categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+-- Dump des données dans la table "products_categories" 
 INSERT INTO `products_categories` (`id`, `product_id`, `category_id`) VALUES
 (1, 1, 2),
 (2, 2, 1);
 
+-- Création de la clef unique "product_id"
+ALTER TABLE `products_categories` ADD UNIQUE KEY `product_id` (`product_id`,`category_id`);
+
+
+
+-- II.5 Création de la table "products_images" 
 CREATE TABLE IF NOT EXISTS `products_images` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
@@ -98,6 +116,7 @@ CREATE TABLE IF NOT EXISTS `products_images` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
+-- Dump des données dans la table "products_images" 
 INSERT INTO `products_images` (`id`, `product_id`, `img`) VALUES
 (1, 1, 'watch-2.jpg'),
 (2, 1, 'watch-3.jpg'),
@@ -106,6 +125,12 @@ INSERT INTO `products_images` (`id`, `product_id`, `img`) VALUES
 (5, 3, 'headphones.jpg'),
 (6, 4, 'camera.jpg');
 
+-- Création de la clef unique "product_id"
+ALTER TABLE `products_images` ADD UNIQUE KEY `product_id` (`product_id`,`img`);
+
+
+
+-- II.6 Création de la table "products_options" 
 CREATE TABLE IF NOT EXISTS `products_options` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
@@ -115,11 +140,15 @@ CREATE TABLE IF NOT EXISTS `products_options` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
+-- Dump des données dans la table "products_options" 
 INSERT INTO `products_options` (`id`, `title`, `name`, `price`, `product_id`) VALUES
 (1, 'Color', 'Black', '29.99', 1),
 (2, 'Color', 'White', '32.99', 1),
 (3, 'Color', 'Blue', '29.99', 1);
 
+
+
+-- II.7 Création de la table "shipping" 
 CREATE TABLE IF NOT EXISTS `shipping` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -131,10 +160,14 @@ CREATE TABLE IF NOT EXISTS `shipping` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+-- Dump des données dans la table "shipping" 
 INSERT INTO `shipping` (`id`, `name`, `price_from`, `price_to`, `price`, `weight_from`, `weight_to`) VALUES
 (1, 'Standard', '0.00', '99999.00', '3.99', '0.00', '99999.00'),
 (2, 'International', '0.00', '99999.00', '7.99', '0.00', '99999.00');
 
+
+
+-- II.8 Création de la table "transactions" 
 CREATE TABLE IF NOT EXISTS `transactions` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `txn_id` varchar(255) NOT NULL,
@@ -154,6 +187,12 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+-- Création de la clef unique "txn_id"
+ALTER TABLE `transactions` ADD UNIQUE KEY `txn_id` (`txn_id`);
+
+
+
+-- II.9 Création de la table "transactions_items" 
 CREATE TABLE IF NOT EXISTS `transactions_items` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `txn_id` varchar(255) NOT NULL,
@@ -168,8 +207,8 @@ CREATE TABLE IF NOT EXISTS `transactions_items` (
 
 
 
-ALTER TABLE `products_categories` ADD UNIQUE KEY `product_id` (`product_id`,`category_id`);
 
-ALTER TABLE `products_images` ADD UNIQUE KEY `product_id` (`product_id`,`img`);
 
-ALTER TABLE `transactions` ADD UNIQUE KEY `txn_id` (`txn_id`);
+
+
+
