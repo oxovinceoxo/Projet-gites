@@ -8,17 +8,17 @@ if ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVE
     $protocol = 'https://';
 }
 define('base_url', rtrim($protocol . $_SERVER['HTTP_HOST'] . substr(str_replace('\\', '/', realpath(__DIR__)), strlen($_SERVER['DOCUMENT_ROOT'])), '/') . '/');
-// Initialize a new session
+// Initialisation de la session
 session_start();
-// Include the configuration file, this contains settings you can change.
+// Include du fichier de configuration
 include 'config.php';
-// Include functions and connect to the database using PDO MySQL
+// Include du fichier contenant les fonctions
 include 'functions.php';
-// Connect to MySQL database
+// Connexion à la base de données SQL
 $pdo = pdo_connect_mysql();
-// Output error variable
+// Stockage de var. str. en cas d'erreur
 $error = '';
-// Define all the routes for all pages
+// Definition du routage 
 $url = routes([
     '/',
     '/home',
@@ -35,11 +35,11 @@ $url = routes([
     '/search/{query}',
     '/logout'
 ]);
-// Check if route exists
+// Vérification du routage
 if ($url) {
     include $url;
 } else {
-    // Page is set to home (home.php) by default, so when the visitor visits that will be the page they see.
+    // La page par défaut lors de la connexion au site est "home".
     $page = isset($_GET['page']) && file_exists($_GET['page'] . '.php') ? $_GET['page'] : 'home';
     // Include the requested page
     include $page . '.php';

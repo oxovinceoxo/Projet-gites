@@ -35,7 +35,7 @@ define('paypal_email','payments@yourwebsite.com');
 // Set this to false when you're ready to start accepting payments on your business account
 define('paypal_testmode',true);
 // Currency to use with PayPal, default is USD
-define('paypal_currency','USD');
+define('paypal_currency','EUR');
 // PayPal IPN url, this should point to the IPN file located in the "ipn" directory
 define('paypal_ipn_url','https://yourwebsite.com/ipn/paypal.php');
 // PayPal cancel URl, the page the customer returns to when they cancel the payment

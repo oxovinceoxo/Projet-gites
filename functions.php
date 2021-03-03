@@ -1,15 +1,15 @@
 <?php
-// Function that will connect to the MySQL database
+// Fonction de connexion à la DB            
 function pdo_connect_mysql() {
     try {
-        // Connect to the MySQL database using PDO...
+        // Se connecte à la DB en utilisant PDO.
     	return new PDO('mysql:host=' . db_host . ';dbname=' . db_name . ';charset=utf8', db_user, db_pass);
     } catch (PDOException $exception) {
-    	// Could not connect to the MySQL database, if this error occurs make sure you check your db settings are correct!
+    	// En cas d'erreur de connexion à la DB, affiche le msg suivant.
     	exit('Failed to connect to database!');
     }
 }
-// Function to retrieve a product from cart by the ID and options string
+// Fonction pour retrouver un produit dans le panier par ID et $options string. (a creuser)
 function &get_cart_product($id, $options) {
     $p = null;
     if (isset($_SESSION['cart'])) {
@@ -22,7 +22,7 @@ function &get_cart_product($id, $options) {
     }
     return $p;
 }
-// Send order details email function
+// Fonction d'envoi d'e-mail pour la gestion  des commandes.
 function send_order_details_email($email, $products, $first_name, $last_name, $address_street, $address_city, $address_state, $address_zip, $address_country, $subtotal, $order_id) {
     if (!mail_enabled) {
         return;
@@ -34,9 +34,10 @@ function send_order_details_email($email, $products, $first_name, $last_name, $a
     $order_details_template = ob_get_clean();
 	mail($email, $subject, $order_details_template, $headers);
 }
-// Template header, feel free to customize this
+// Header du site, à customiser.
 function template_header($title, $head = '') {
-// Get the amount of items in the shopping cart, this will be displayed in the header.
+
+// Récupère le nombre d'items dans le panier et les ajoute au header.
 $num_items_in_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
 $home_link = url('index.php');
 $products_link = url('index.php?page=products');
@@ -87,7 +88,7 @@ echo <<<EOT
         <main>
 EOT;
 }
-// Template footer
+// Template du footer
 function template_footer() {
 $base_url = base_url;
 $rewrite_url = rewrite_url ? 'true' : 'false';
@@ -110,7 +111,7 @@ echo <<<EOT
 </html>
 EOT;
 }
-// Template admin header
+// Template du header admin
 function template_admin_header($title, $selected = 'orders') {
     $admin_links = '
         <a href="index.php?page=dashboard"' . ($selected == 'dashboard' ? ' class="selected"' : '') . '><i class="fas fa-tachometer-alt"></i>Dashboard</a>
@@ -151,7 +152,7 @@ echo <<<EOT
             </header>
 EOT;
 }
-// Template admin footer
+// Template du footer admin
 function template_admin_footer() {
 echo <<<EOT
         </main>
@@ -182,7 +183,7 @@ function url($url) {
     }
     return base_url . $url;
 }
-// Routeing function
+// Fonction de routing
 function routes($urls) {
     foreach ($urls as $url) {
         $url = '/' . ltrim($url, '/');

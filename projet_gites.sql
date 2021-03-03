@@ -118,12 +118,18 @@ CREATE TABLE IF NOT EXISTS `products_images` (
 
 -- Dump des données dans la table "products_images" 
 INSERT INTO `products_images` (`id`, `product_id`, `img`) VALUES
-(1, 1, 'watch-2.jpg'),
-(2, 1, 'watch-3.jpg'),
-(3, 1, 'watch.jpg'),
-(4, 2, 'wallet.jpg'),
-(5, 3, 'headphones.jpg'),
-(6, 4, 'camera.jpg');
+(1, 1, '1_1.png'),
+(2, 1, '1_2.png'),
+(3, 1, '1_3.png'),
+(4, 2, '2_1.png'),
+(5, 2, '2_2.png'),
+(6, 2, '2_3.png'),
+(7, 3, '3_1.png'),
+(8, 3, '3_2.png'),
+(9, 3, '3_3.png'),
+(10, 4, '4_1.png'),
+(11, 4, '4_2.png'),
+(12, 4, '4_3.png');
 
 -- Création de la clef unique "product_id"
 ALTER TABLE `products_images` ADD UNIQUE KEY `product_id` (`product_id`,`img`);
