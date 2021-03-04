@@ -25,7 +25,7 @@ define('mail_enabled',true);
 // Rewrite URL? (!OPTION A CREUSER!)
 define('rewrite_url',false);
 
-/* PARAMETRES PAYPAL */
+/* PARAMETRES PAIEMENT PAYPAL */
 // Accepter les paiements PAYPAL? (oui par défaut)
 define('paypal_enabled',true);
 // Adresse paypal pour la réception des virements.
@@ -44,15 +44,15 @@ define('paypal_cancel_url','https://yourwebsite.com/cart');
 // PayPal return URL, the page the customer returns to after the payment has been made:
 define('paypal_return_url','https://yourwebsite.com/placeorder');
 
-/* STRIPE SETTINGS */
-// Accept payments with Stripe?
-define('stripe_enabled',true);
-// Stripe Secret API Key
+/* PARAMETRES PAIEMENT STRIPE (DESACTIVE) */
+// Accepter les paiements via STRIPE ?
+define('stripe_enabled',false);
+// Clef API secrète stripe
 define('stripe_secret_key','');
-// Stripe Publishable API Key
+// Clef API publique stripe
 define('stripe_publish_key','');
-// Stripe currency
-define('stripe_currency','USD');
+// Devise utilisée par Stripe
+define('stripe_currency','EUR');
 // Stripe IPN url, this should point to the IPN file located in the "ipn" directory
 define('stripe_ipn_url','https://yourwebsite.com/ipn/stripe.php');
 // PayPal cancel URl, the page the customer returns to when they cancel the payment

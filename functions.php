@@ -10,9 +10,9 @@ function pdo_connect_mysql() {
     }
 }
 
-// Temple Header (à customiser)
+// Template du Header (à customiser avec le CSS de Vince)
 function template_header($title, $head = '') {
-    // Get the amount of items in the shopping cart, this will be displayed in the header.
+    // Récupère le nombre de réservations en cours et les affiche dans le header (gestion du "panier").
     $num_items_in_cart = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
     $home_link = url('index.php');
     $products_link = url('index.php?page=products');
