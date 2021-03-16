@@ -88,72 +88,66 @@ class DataBase{
     }
 
 
+    public function FormulaireRecherche(){
+
+ ?>
+        <form method="POST" action="filtreRecherche.php">
+
+            <label for="prix">Prix</label>
+            <select name="prix">
+                <option value="9"></option>
+                <option value="1">croissant</option>
+                <option value="2">décroissant</option>
+            </select>
+
+
+            <label for="titre">Nombre de chambres</label>
+            <select name="NbrChambre">
+                <option value="9"></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>
+
+
+            <label for="titre">zone</label>
+            <select name="zone">
+                <option value="9"></option>
+                <option value="mer">mer</option>
+                <option value="montagne">montagne</option>
+                <option value="campagne">campagne</option>
+                <option value="ville">ville</option>
+            </select>
+
+            <label for="date">date d'arrivée</label>
+            <input type="date"  name="date_arrivee">
+
+            <label for="date">date de départ</label>
+            <input type="date"  name="date_depart">
+
+            <button name="recherche" type="submit">RECHERCHE</button>
+
+        </form>
+
+
+     <?php
+    }
+
     public function recuperationGitesCLient (){
 
         //apppel de la connexion
         $BD = $this->databaseConnexion();
 
 
-// 1 requete sql pour afficher tout les elements de la base de données
+        // 1 requete sql pour afficher tout les elements de la base de données
         $sql = "SELECT * FROM type ";
-// 2 je stock la requete dans une variable
+        // 2 je stock la requete dans une variable
         $liste = $BD->query($sql);
 
-        ?>
-
-        <h1>liste des Gites</h1>
-        <h2>RECHERCHE UN GITE</h2>
-
-        <form method="POST" action="filtreRecherche.php">
-
-
-        <label for="prix">Prix</label>
-        <select name="prix">
-            <option value="">prix</option>
-            <option value="1">croissant</option>
-            <option value="2">décroissant</option>
-        </select>
-
-
-        <label for="titre">Nombre de chambres</label>
-        <select name="NbrChambre">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-        </select>
-
-
-        <label for="titre">zone</label>
-        <select name="zone">
-            <option value="mer">mer</option>
-            <option value="montagne">montagne</option>
-            <option value="campagne">campagne</option>
-            <option value="ville">ville</option>
-        </select>
-
-        <label for="date">date d'arrivée</label>
-        <input type="date"  name="date_arrivee">
-
-        <label for="date">date de départ</label>
-        <input type="date"  name="date_depart">
-
-        <button name="recherche" type="submit">RECHERCHE</button>
-        <?php
-        /*
-        if(isset($_POST["recherche"])){
-    $this->filtrePrix();
-}else{
-    echo "merci de remplir tous le champ prix";
-}*/
-
-
-
-
-
-// 3 je fais une boucle while ou foreach pour lister les elements de la table
+        // 3 je fais une boucle while ou foreach pour lister les elements de la table
 
         while ($row = $liste->fetch()){
 
@@ -179,10 +173,19 @@ class DataBase{
     }
 
 
+    public function ShowResultat (){
+        $BD=$this->databaseConnexion();
+
+        if (($_POST['prix'] == 9) && ($_POST['NbrChambre'] == 9) && ($_POST['zone'] == 9)){
+            header('Location: http://localhost/Gites3/client.php');
+        }elseif((($_POST['prix'] == (1 || 2)) && ($_POST['NbrChambre'] == 9) && ($_POST['zone'] == 9))){
+$this->filtrePrix();
+        }
+
+    }
+
     public function filtrePrix () {
-$BD=$this->databaseConnexion();
-
-
+    $BD=$this->databaseConnexion();
         if (isset($_POST['prix'])) {
         $prix = $_POST['prix'];
 
@@ -614,5 +617,7 @@ $BD=$this->databaseConnexion();
 
 
     }
+
+
 
 }
