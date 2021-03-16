@@ -141,9 +141,10 @@ class DataBase{
         //apppel de la connexion
         $BD = $this->databaseConnexion();
 
+        $today= date("Y-m-d");
 
         // 1 requete sql pour afficher tout les elements de la base de données
-        $sql = "SELECT * FROM type ";
+        $sql = "SELECT * FROM `type` WHERE '$today'>= `date_depart` AND disponible = 1";
         // 2 je stock la requete dans une variable
         $liste = $BD->query($sql);
 
