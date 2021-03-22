@@ -9,6 +9,7 @@ $gite= new DataBase();
         <h2>RECHERCHE UN GITE</h2>
 
 <?php
+
 $gite->FormulaireRecherche();
 
 $gite->recuperationGitesCLient();

@@ -5,14 +5,14 @@ require "Database.php";
 
 
 
-
+//la class Admin hérite de la class Database
 class Admin extends Database
 {
     private $email_admin;
     private $password_admin;
 
 
-public function ConnexionAdmin(){
+    public function ConnexionAdmin(){
 
     $BD = $this->databaseConnexion();
 
@@ -79,4 +79,5 @@ public function ConnexionAdmin(){
         echo "test";
     }
 }
+
 }
